@@ -1,6 +1,7 @@
-package com.kulbitski.restaurantCollectionAPI.models;
+package com.kulbitski.restaurant.models;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "restaurant")
@@ -17,11 +18,11 @@ public class Restaurant {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "average_rating")
+    private BigDecimal averageRating;
+
     @Column(name = "estimated_cost")
     private int estimatedCost;
-
-    @Column(name = "average_rating")
-    private String averageRating;
 
     @Column(name = "votes")
     private int votes;
@@ -29,7 +30,7 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String city, String name, int estimatedCost, String averageRating, int votes) {
+    public Restaurant(String city, String name,  BigDecimal averageRating, int estimatedCost, int votes) {
         this.city = city;
         this.name = name;
         this.estimatedCost = estimatedCost;
@@ -69,11 +70,11 @@ public class Restaurant {
         this.estimatedCost = estimatedCost;
     }
 
-    public String getAverageRating() {
+    public BigDecimal getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(String averageRating) {
+    public void setAverageRating(BigDecimal averageRating) {
         this.averageRating = averageRating;
     }
 
