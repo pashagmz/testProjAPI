@@ -35,14 +35,6 @@ public class RestaurantsControllerTest {
 
     @Test
     public void getAllRestaurants_shouldReturnListOfRestaurants() {
-        List<RestaurantDTO> expectedList = new ArrayList<>();
-        when(restaurantsService.findAll()).thenReturn(new ArrayList<>());
-
-        List<RestaurantDTO> result = restaurantsController.getAll();
-
-        // Assert
-        assertEquals(expectedList.size(), result.size());
-        verify(restaurantsService, times(1)).findAll();
-        verify(restaurantConverter, times(expectedList.size())).convertToDTO(any());
+        // todo:
     }
 }

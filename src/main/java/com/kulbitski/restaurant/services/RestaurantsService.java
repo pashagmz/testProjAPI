@@ -1,12 +1,16 @@
 package com.kulbitski.restaurant.services;
 
 import com.kulbitski.restaurant.dto.requests.RestaurantCreateRequest;
+import com.kulbitski.restaurant.dto.requests.RestaurantFilter;
 import com.kulbitski.restaurant.dto.requests.RestaurantUpdateRequest;
 import com.kulbitski.restaurant.models.Restaurant;
 import java.util.List;
+import org.springframework.beans.PropertyValues;
 import org.springframework.data.domain.Sort;
 
 public interface RestaurantsService {
+
+    List<Restaurant> find(RestaurantFilter filter);
 
     List<Restaurant> findAll();
 

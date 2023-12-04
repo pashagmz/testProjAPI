@@ -1,12 +1,14 @@
 package com.kulbitski.restaurant.services.impl;
 
 import com.kulbitski.restaurant.dto.requests.RestaurantCreateRequest;
+import com.kulbitski.restaurant.dto.requests.RestaurantFilter;
 import com.kulbitski.restaurant.dto.requests.RestaurantUpdateRequest;
 import com.kulbitski.restaurant.exceptions.RestaurantNotFoundException;
 import com.kulbitski.restaurant.repositories.RestaurantsRepository;
 import com.kulbitski.restaurant.models.Restaurant;
 import com.kulbitski.restaurant.services.RestaurantsService;
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,13 @@ public class RestaurantsServiceImpl implements RestaurantsService {
         this.restaurantsRepository = restaurantsRepository;
     }
 
+    @Override
+    public List<Restaurant> find(RestaurantFilter filter) {
+        return restaurantsRepository.findByCityIgnoreCaseAndAverageRating(
+            Optional.ofNullable(filter.getId()),
+            Optional.ofNullable(filter.getCity())
+        );
+    }
     @Override
     public List<Restaurant> findAll() {
         return restaurantsRepository.findAll();

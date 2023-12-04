@@ -3,6 +3,7 @@ package com.kulbitski.restaurant.controllers;
 import com.kulbitski.restaurant.converters.RestaurantConverter;
 import com.kulbitski.restaurant.dto.RestaurantDTO;
 import com.kulbitski.restaurant.dto.requests.RestaurantCreateRequest;
+import com.kulbitski.restaurant.dto.requests.RestaurantFilter;
 import com.kulbitski.restaurant.dto.requests.RestaurantUpdateRequest;
 import com.kulbitski.restaurant.services.RestaurantsService;
 import java.util.List;
@@ -38,8 +39,8 @@ public class RestaurantsController {
     }
 
     @GetMapping
-    public List<RestaurantDTO> getAll() {
-        return restaurantsService.findAll().stream()
+    public List<RestaurantDTO> find(RestaurantFilter filter) {
+        return restaurantsService.find(filter).stream()
             .map(restaurantConverter::convertToDTO)
             .collect(Collectors.toList());
     }
@@ -66,6 +67,7 @@ public class RestaurantsController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody RestaurantCreateRequest createRequest) {
+        // restaurantValidator.validate(updateRequest);
         restaurantsService.save(createRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -75,6 +77,7 @@ public class RestaurantsController {
         @PathVariable Integer id,
         @RequestBody RestaurantUpdateRequest updateRequest
     ) {
+        // restaurantValidator.validate(updateRequest);
         restaurantsService.update(id, updateRequest);
         return ResponseEntity.ok(HttpStatus.OK);
     }
